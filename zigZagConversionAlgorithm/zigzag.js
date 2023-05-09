@@ -1,25 +1,15 @@
 function solution(string = "PAYPALISHIRING", numberOfRows = 4) {
-  var currentRow = 0;
+  if (numberOfRows === 1 || string.lenght < numberOfRows) return string;
 
-  var goDown = true;
-
-  zigZagArray = [];
-
-  for (var i = 0; i < string.length; i++) {
-    zigZagArray[currentRow] = string[i];
-
-    if (goDown) {
-      currentRow = currentRow + 1;
-      if (currentRow > numberOfRows) {
-        currentRow -= 1;
-        goDown = false;
-      }
-    } else {
-      currentRow -= 1;
-      if (currentRow < 1) currentRow = 2;
-      goDown = true;
-    }
+  let direction = false;
+  let count = 0;
+  let arr = new Array(numberOfRows).fill("");
+  for (let i = 0; i < string.length; i++) {
+    let curr = string[i];
+    arr[count] += curr;
+    if (count === 0 || count >= numberOfRows - 1) direction = !direction;
+    direction ? count++ : count--;
   }
-  return zigZagArray;
+  return arr.join("");
 }
 console.log(solution());
